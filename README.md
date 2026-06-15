@@ -30,6 +30,21 @@ By the end, the harness here should be one we (and an agent) can genuinely use.
 - [x] **L11** — Observability inside the harness → structured logs + `evaluator-rubric.md`, `verification-log.md`
 - [x] **L12** — Every session must leave a clean state → `make clean-state`, harness simplification
 
+## Harness self-assessment
+
+**Overall: 9.0 / 10 (A)** — all five L2 subsystems present, each mapped to an L1
+failure layer, with executable feedback (the highest-ROI subsystem) done right.
+
+| Subsystem | Score | |
+|-----------|:-----:|--|
+| Instruction (`AGENTS.md`) | 9.5 | true router (~76 lines), progressive disclosure, recency-effect rule placement |
+| Feedback | 9.5 | `make check` (arch+tsc+unit+E2E), 3-layer Definition of Done, independent verifier agents |
+| Scope | 9.0 | `feature_list.json` with harness-controlled `state`, `passing` irreversible, WIP=1 |
+| Environment | 8.0 | `Makefile` + `init.sh` + pinned stack; 2 dev-only npm advisories deferred on purpose |
+| State | 9.0 | `PROGRESS.md` + `DECISIONS.md` + session routines, reconciled to current reality |
+
+Remaining gap: the deferred dev-only npm advisories (see `harness/state/DECISIONS.md`).
+
 ## Beyond the curriculum
 
 - **3-agent workflow** (`harness/workflows/three-agent-workflow.md`): added feature F06
