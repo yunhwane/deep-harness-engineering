@@ -24,8 +24,8 @@
       "id": "F01",
       "behavior": "POST /tasks with {\"title\":\"buy milk\"} returns 201 and a JSON task {id, title, done:false}",
       "verification": "curl -fs -X POST localhost:3000/tasks -H 'content-type: application/json' -d '{\"title\":\"buy milk\"}' | grep -q '\"done\":false'",
-      "state": "not_started",
-      "evidence": ""
+      "state": "passing",
+      "evidence": "test/tasks.test.ts (2 tests); make check green; e2e curl POST -> 201 {done:false}; independent verifier agent ac6235 VERDICT PASS (2026-06-15)"
     },
     {
       "id": "F02",

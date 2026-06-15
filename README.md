@@ -25,7 +25,7 @@ By the end, the harness here should be one we (and an agent) can genuinely use.
 - [x] **L6** — Initialization needs its own phase → Node/TS env, `Makefile`, passing test
 - [x] **L7** — Agents overreach and under-finish → `harness/scope/scope-policy.md` (WIP=1)
 - [x] **L8** — Feature lists are harness primitives → `harness/scope/feature_list.json`
-- [ ] L9 — Agents declare victory too early
+- [x] **L9** — Agents declare victory too early → `definition-of-done.md`; F01 verified→passing
 - [ ] L10 — E2E testing changes results
 - [ ] L11 — Observability inside the harness
 - [ ] L12 — Every session must leave a clean state

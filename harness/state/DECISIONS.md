@@ -3,6 +3,14 @@
 > State subsystem (L5). Preserves the **"why"** that compaction discards. Append-only:
 > decision · why · rejected alternatives · constraints · date. Newest at top.
 
+## 2026-06-15: example-app persistence = in-memory (Map), module-level
+- **Why:** the harness lessons don't need a real DB; an in-memory store keeps init and
+  E2E trivial. Decided when F01 (POST /tasks) was implemented (L9), per the placeholder
+  left in ARCHITECTURE.md.
+- **Rejected:** SQLite/Postgres — real persistence adds setup with no lesson value here.
+- **Constraint:** state is per-process; `reset()` exists for test isolation. Revisit only
+  if a lecture needs durability across restarts.
+
 ## 2026-06-15: example-app stack = Node 26 + TypeScript + Fastify + vitest
 - **Why:** chosen by the user at L6. Fastify gives a real server for E2E later (L10) with
   one dependency and good TS types; vitest is TS-native; `app.inject` enables fast tests.
