@@ -39,6 +39,8 @@
 - `make check` green: arch checks + typecheck + 14 tests (store + health + tasks/F06 + E2E)
 - **Real OpenTelemetry**: runtime request spans + `make trace` decision-layer trace
   (session→feature→verification). Console exporter; prod-dep audit 0 vulns; tests unaffected.
+- **OTLP + Jaeger**: env-switched OTLP exporter; `make jaeger-up` → traces verified in Jaeger
+  via query API (services `harness` 17 spans + `example-app` request spans). docs/deep-dives/otlp-jaeger.md.
 - **Resource Library gap analysis** vs official templates: added `init.sh`, `pwd`/`git log`
   onboarding, scope-state check in clean-state, richer rubric (Reliability/Maintainability/
   Handoff + Accept/Revise/Block), session-handoff template. Deliberate divergences documented.

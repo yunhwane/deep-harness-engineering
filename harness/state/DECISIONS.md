@@ -3,15 +3,16 @@
 > State subsystem (L5). Preserves the **"why"** that compaction discards. Append-only:
 > decision · why · rejected alternatives · constraints · date. Newest at top.
 
-## 2026-06-15: OpenTelemetry = manual spans + ConsoleSpanExporter (no collector)
-- **Why:** make L11's traces real without standing up Jaeger/Zipkin. Manual instrumentation
-  (a Tracer + request hooks + a trace emitter) gives genuine OTel spans with trace/parent
-  linkage while keeping the dependency surface small and deterministic.
-- **Rejected:** `@opentelemetry/auto-instrumentations-node` — pulls dozens of packages and
-  more vuln surface for little teaching value here; OTLP exporter — needs a running collector.
-- **Constraint / sunset:** swap `ConsoleSpanExporter` → OTLP exporter in `src/otel.ts` if a
-  collector is ever added; nothing else changes. Tracing is no-op until `startOtel()` runs,
-  so tests are unaffected. Prod-dep audit after adding OTel: **0 vulnerabilities**.
+## 2026-06-15: OpenTelemetry exporter = env-switched Console ↔ OTLP (Jaeger)
+- **Why:** keep zero-infra console spans by default, but flip to a real OTLP collector
+  (Jaeger) with one env var (`OTEL_EXPORTER_OTLP_ENDPOINT`) — the sunset promised when this
+  was console-only is now realized. Manual instrumentation kept (no auto-instrumentation).
+- **Rejected:** `@opentelemetry/auto-instrumentations-node` (dozens of pkgs, more vuln
+  surface); making OTLP the default (would force infra on every run/test).
+- **Constraint:** Jaeger runs via `make jaeger-up` (docker all-in-one, OTLP :4318, UI :16686);
+  it is external infra, not torn down by `make clean-state`. Tracing stays no-op until
+  `startOtel()` runs (tests unaffected). Prod-dep audit after adding the OTLP exporter: **0 vulns**.
+- **Verified:** spans confirmed in Jaeger via its query API (services `harness` + `example-app`).
 
 ## 2026-06-15: example-app persistence = in-memory (Map), module-level
 - **Why:** the harness lessons don't need a real DB; an in-memory store keeps init and

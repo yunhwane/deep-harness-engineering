@@ -33,8 +33,10 @@ is registered** (`startOtel()` in `server.ts`), so tests stay silent.
   L11's "trace per session, span per task, sub-span per verification step" — literally,
   and all under one trace_id.
 
-To send to Jaeger/Zipkin later, swap `ConsoleSpanExporter` for an OTLP exporter in
-`otel.ts`; nothing else changes.
+**OTLP/Jaeger (done):** set `OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4318` and the same
+spans flow to a real Jaeger collector — `make jaeger-up`, then `make trace` / `make dev`,
+view at <http://localhost:16686>. Verified via Jaeger's query API. See
+`docs/deep-dives/otlp-jaeger.md`.
 
 ## Why it belongs inside
 Without it: correctness vs appearance is indistinguishable, evaluation goes mystical,

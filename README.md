@@ -38,6 +38,8 @@ By the end, the harness here should be one we (and an agent) can genuinely use.
 - **Real OpenTelemetry** (`docs/deep-dives/otel-integration.md`): runtime request spans +
   a decision-layer trace (`make trace`: session → feature → verification). Console exporter,
   no collector needed.
+- **OTLP + Jaeger** (`docs/deep-dives/otlp-jaeger.md`): one env var flips the exporter to a
+  real Jaeger collector (`make jaeger-up`, UI :16686); spans verified via Jaeger's query API.
 - **Automated workflow + majority vote** (`harness/workflows/feature-pipeline.mjs`): a
   reusable Plan→Generate→3-evaluator-panel pipeline. Added F07 (`/tasks/stats`); the panel's
   first vote (0/3) caught a process gap a single review missed, harness fixed it, re-vote 3/3.
