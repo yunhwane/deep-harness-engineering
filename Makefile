@@ -3,7 +3,7 @@
 
 APP := example-app
 
-.PHONY: setup dev test typecheck check
+.PHONY: setup dev test typecheck arch check
 
 setup:   ## install + lock dependencies from scratch
 	cd $(APP) && npm install
@@ -11,11 +11,14 @@ setup:   ## install + lock dependencies from scratch
 dev:     ## run the dev server (watch mode)
 	cd $(APP) && npm run dev
 
-test:    ## run the test suite once
+test:    ## run all tests once (unit/integration + E2E)
 	cd $(APP) && npm test
 
 typecheck: ## TypeScript type checking, no emit
 	cd $(APP) && npm run typecheck
 
-check:   ## the gate: typecheck + tests must both pass
-	cd $(APP) && npm run typecheck && npm test
+arch:    ## executable architecture boundary checks (L10)
+	cd $(APP) && bash scripts/check-architecture.sh
+
+check:   ## the gate (L9 3 layers): arch + typecheck + tests (incl. E2E)
+	cd $(APP) && bash scripts/check-architecture.sh && npm run typecheck && npm test

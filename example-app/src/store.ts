@@ -17,6 +17,29 @@ export function createTask(title: string): Task {
   return task
 }
 
+export function listTasks(): Task[] {
+  return [...tasks.values()]
+}
+
+export function getTask(id: string): Task | undefined {
+  return tasks.get(id)
+}
+
+export function updateTask(
+  id: string,
+  patch: { title?: string; done?: boolean },
+): Task | undefined {
+  const task = tasks.get(id)
+  if (!task) return undefined
+  if (patch.title !== undefined) task.title = patch.title
+  if (patch.done !== undefined) task.done = patch.done
+  return task
+}
+
+export function deleteTask(id: string): boolean {
+  return tasks.delete(id)
+}
+
 export function reset(): void {
   tasks.clear()
 }

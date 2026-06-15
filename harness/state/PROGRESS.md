@@ -4,7 +4,7 @@
 > working state in minutes, not by re-exploring. Keep it current — stale = worse than none.
 
 ## Current status
-- **Latest commit:** `f20f959` (L8: feature_list.json)
+- **Latest commit:** `612d22f` (L9: DoD + F01 passing)
 - **Stack:** Node 26 + TypeScript + Fastify + vitest (`example-app/`)
 - **Tests:** `make check` green — `tsc` clean + 1 test (`GET /health`)
 - **Server:** boots; `curl :PORT/health → {"status":"ok"}`
@@ -21,13 +21,14 @@
 - [x] L7 — scope policy (WIP=1, completion evidence, VCR)
 - [x] L8 — feature_list.json (scope surface) + schema; F00 passing, F01-F05 not_started
 - [x] L9 — Definition of Done (3-layer gate); F01 POST /tasks driven to passing via independent verifier
+- [x] L10 — real E2E harness + executable arch checks; F02-F05 implemented & verified
 
 ## In progress
 - (nothing — between lectures)
 
 ## example-app feature progress (from feature_list.json)
-- passing 2/6 (F00 /health, F01 POST /tasks) · not_started 4/6 (F02-F05) · active 0 (WIP=1 ✓)
-- Tests: `make check` green — 3 tests across health + tasks
+- **passing 6/6** (F00-F05) · back-pressure 0 → feature-complete · active 0 (WIP=1 ✓)
+- `make check` green: arch checks + typecheck + 4 tests (incl. real E2E CRUD flow)
 
 ## Known issues
 - **5 npm audit advisories (3 moderate, 1 high, 1 critical)**, all in the dev-only
@@ -37,9 +38,8 @@
 - "Latest commit" line lags one checkpoint by design; reconcile at each onboarding.
 
 ## Next steps (priority order)
-1. L10 — E2E testing harness; likely implement F02/F03 (GET) with real E2E verification.
-2. L11 — observability inside the harness.
-3. L12 — clean-state-per-session.
+1. L11 — observability inside the harness (structured logs/signals; ties to arch Rule 2).
+2. L12 — clean-state-per-session (final lecture).
 
 ## How to resume (onboarding)
 Read this file → read `harness/state/DECISIONS.md` → check `README.md` progress →

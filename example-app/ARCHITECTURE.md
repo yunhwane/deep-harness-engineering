@@ -23,7 +23,11 @@ harness something real to define, verify, and track. Scope is kept tiny on purpo
 - `src/store.ts` — in-memory task store (`Map`), module-level, with `reset()` (decided L9).
 
 ## Status (mirrors feature_list.json — that file is authoritative)
-- `GET /health` — **passing** (F00)
-- `POST /tasks` — **passing** (F01): 201 with {id,title,done:false}; 400 on empty title
-- `GET/PATCH/DELETE /tasks` — not_started (F02-F05)
-Validate with `make check` from repo root.
+All features **passing (6/6)**:
+- `GET /health` (F00), `POST /tasks` (F01), `GET /tasks` (F02), `GET /tasks/:id` (F03),
+  `PATCH /tasks/:id` (F04), `DELETE /tasks/:id` (F05). Unknown ids → 404; bad bodies → 400.
+- Validate with `make check` (architecture checks + typecheck + unit/integration + E2E).
+
+## Boundaries (enforced by scripts/check-architecture.sh)
+- Only `src/server.ts` may `.listen()` — `buildApp()` stays side-effect-free.
+- No ad-hoc `console.*` in `src/app.ts`/`src/store.ts` (logging via observability, L11).
