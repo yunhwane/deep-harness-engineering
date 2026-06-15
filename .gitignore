@@ -1,0 +1,10 @@
+# OS / editor
+.DS_Store
+*.swp
+
+# Will grow when example-app gets a runtime (L6)
+node_modules/
+__pycache__/
+*.pyc
+.venv/
+dist/
