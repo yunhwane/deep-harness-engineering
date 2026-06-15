@@ -39,8 +39,9 @@ Authoritative state: `harness/state/PROGRESS.md`. Summary in `README.md`.
 As of now: **all 12 lectures complete.** example-app feature-complete (6/6).
 
 ## Session routines (L5 — survive session boundaries & compaction)
-**Onboarding (start):** read `harness/state/PROGRESS.md` → skim `harness/state/DECISIONS.md`
-(the *why*) → (once it exists) run `make check` → resume from PROGRESS "Next steps".
+**Onboarding (start):** `pwd` (confirm repo root — a stray cwd silently no-op'd `make` once)
+→ `git log --oneline -5` → read `harness/state/PROGRESS.md` → skim `DECISIONS.md` (the *why*)
+→ `./init.sh` (or `make check`) → resume from PROGRESS "Next steps".
 **Offboarding (end):** update `PROGRESS.md` → `make check` → commit completed work →
 **`make clean-state`** (L12). A session is complete only if the task passed validation
 AND `make clean-state` passes. Begin handoff prep at ~60%+ context use.

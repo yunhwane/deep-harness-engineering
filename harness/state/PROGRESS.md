@@ -36,6 +36,9 @@
 - `make check` green: arch checks + typecheck + 14 tests (store + health + tasks/F06 + E2E)
 - **Real OpenTelemetry**: runtime request spans + `make trace` decision-layer trace
   (session→feature→verification). Console exporter; prod-dep audit 0 vulns; tests unaffected.
+- **Resource Library gap analysis** vs official templates: added `init.sh`, `pwd`/`git log`
+  onboarding, scope-state check in clean-state, richer rubric (Reliability/Maintainability/
+  Handoff + Accept/Revise/Block), session-handoff template. Deliberate divergences documented.
 
 ## Known issues
 - **5 npm audit advisories (3 moderate, 1 high, 1 critical)**, all in the dev-only
