@@ -25,7 +25,9 @@ drive the in-flight task to verified first.
 
 ## Scope Surface
 All task state lives in a **file**, not the conversation: unit, dependencies, and state
-(`not_started` / `active` / `blocked` / `passing`). That file is `feature_list.json` (L8).
+(`not_started` / `active` / `blocked` / `passing`). That file is **`feature_list.json`**
+(built in L8; schema in `feature-list-schema.md`). It is harness-controlled — agents
+propose transitions and run verification, but never self-mark `passing`.
 
 ## How this study already obeys WIP=1
 One lecture = one active task (see the task list + `PROGRESS.md` "in progress" holds ≤1).

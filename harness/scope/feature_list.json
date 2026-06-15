@@ -1,0 +1,59 @@
+{
+  "_meta": {
+    "doc": "Scope surface (L7) and harness primitive (L8). Single source of truth for example-app scope.",
+    "rules": [
+      "The `state` field is harness-controlled. An agent MUST NOT hand-edit a feature to `passing`.",
+      "The only path active -> passing is the feature's `verification` command actually succeeding.",
+      "passing is irreversible: no passing -> not_started regressions.",
+      "If scope changes, it changes HERE first; conversation/code comments never override this file.",
+      "Granularity: each feature is completable in one session (~2-4h)."
+    ],
+    "states": ["not_started", "active", "blocked", "passing"],
+    "model": "Task = { id: string, title: string, done: boolean }"
+  },
+  "project": "example-app Task API",
+  "features": [
+    {
+      "id": "F00",
+      "behavior": "GET /health returns 200 with body {\"status\":\"ok\"}",
+      "verification": "curl -fs localhost:3000/health | grep -q '\"status\":\"ok\"'",
+      "state": "passing",
+      "evidence": "commit 5b57417; example-app/test/health.test.ts; make check green"
+    },
+    {
+      "id": "F01",
+      "behavior": "POST /tasks with {\"title\":\"buy milk\"} returns 201 and a JSON task {id, title, done:false}",
+      "verification": "curl -fs -X POST localhost:3000/tasks -H 'content-type: application/json' -d '{\"title\":\"buy milk\"}' | grep -q '\"done\":false'",
+      "state": "not_started",
+      "evidence": ""
+    },
+    {
+      "id": "F02",
+      "behavior": "GET /tasks returns 200 and a JSON array of all tasks",
+      "verification": "curl -fs localhost:3000/tasks | grep -q '^\\['",
+      "state": "not_started",
+      "evidence": ""
+    },
+    {
+      "id": "F03",
+      "behavior": "GET /tasks/:id returns 200 with the task; returns 404 for an unknown id",
+      "verification": "curl -fs -o /dev/null -w '%{http_code}' localhost:3000/tasks/does-not-exist | grep -q '^404$'",
+      "state": "not_started",
+      "evidence": ""
+    },
+    {
+      "id": "F04",
+      "behavior": "PATCH /tasks/:id with {\"done\":true} returns 200 with the updated task; 404 for unknown id",
+      "verification": "e2e test 'PATCH /tasks/:id toggles done' passes via make check (added in L10)",
+      "state": "not_started",
+      "evidence": ""
+    },
+    {
+      "id": "F05",
+      "behavior": "DELETE /tasks/:id returns 204; a subsequent GET /tasks/:id returns 404",
+      "verification": "e2e test 'DELETE then GET 404' passes via make check (added in L10)",
+      "state": "not_started",
+      "evidence": ""
+    }
+  ]
+}

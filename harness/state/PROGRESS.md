@@ -4,7 +4,7 @@
 > working state in minutes, not by re-exploring. Keep it current — stale = worse than none.
 
 ## Current status
-- **Latest commit:** `5b57417` (L6: initialization phase)
+- **Latest commit:** `3f75cc9` (L7: scope policy)
 - **Stack:** Node 26 + TypeScript + Fastify + vitest (`example-app/`)
 - **Tests:** `make check` green — `tsc` clean + 1 test (`GET /health`)
 - **Server:** boots; `curl :PORT/health → {"status":"ok"}`
@@ -19,9 +19,13 @@
 - [x] L5 — PROGRESS.md + DECISIONS.md + session routines
 - [x] L6 — initialization phase: Node/TS/Fastify env, Makefile, passing test
 - [x] L7 — scope policy (WIP=1, completion evidence, VCR)
+- [x] L8 — feature_list.json (scope surface) + schema; F00 passing, F01-F05 not_started
 
 ## In progress
 - (nothing — between lectures)
+
+## example-app feature progress (from feature_list.json)
+- passing 1/6 (F00 /health) · not_started 5/6 (F01-F05 CRUD) · active 0 (WIP=1 ✓)
 
 ## Known issues
 - **5 npm audit advisories (3 moderate, 1 high, 1 critical)**, all in the dev-only
@@ -31,9 +35,9 @@
 - "Latest commit" line lags one checkpoint by design; reconcile at each onboarding.
 
 ## Next steps (priority order)
-1. L8 — feature_list.json (the scope surface) + example-app's first real CRUD spec.
-2. L9 — Definition of Done / victory verification.
-3. L10 — E2E testing.
+1. L9 — Definition of Done; likely drive F01 (POST /tasks) active→passing as a worked example.
+2. L10 — E2E testing (formalizes F04/F05 verification).
+3. L11 — observability.
 
 ## How to resume (onboarding)
 Read this file → read `harness/state/DECISIONS.md` → check `README.md` progress →

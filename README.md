@@ -24,7 +24,7 @@ By the end, the harness here should be one we (and an agent) can genuinely use.
 - [x] **L5** — Long-running tasks lose continuity → `harness/state/PROGRESS.md` + `DECISIONS.md`
 - [x] **L6** — Initialization needs its own phase → Node/TS env, `Makefile`, passing test
 - [x] **L7** — Agents overreach and under-finish → `harness/scope/scope-policy.md` (WIP=1)
-- [ ] L8 — Feature lists are harness primitives
+- [x] **L8** — Feature lists are harness primitives → `harness/scope/feature_list.json`
 - [ ] L9 — Agents declare victory too early
 - [ ] L10 — E2E testing changes results
 - [ ] L11 — Observability inside the harness

@@ -35,7 +35,7 @@ check is still the **Cold-Start Test** (`harness/diagnostics/cold-start-test.md`
 
 ## 5. What is the current progress?
 Authoritative state: `harness/state/PROGRESS.md`. Summary in `README.md`.
-As of now: **L1-L7 complete.** Next: L8.
+As of now: **L1-L8 complete.** Next: L9.
 
 ## Session routines (L5 — survive session boundaries & compaction)
 **Onboarding (start):** read `harness/state/PROGRESS.md` → skim `harness/state/DECISIONS.md`
@@ -57,6 +57,7 @@ Begin handoff prep when a task needs ~60%+ of the context window.
 | touching `example-app/` | `example-app/ARCHITECTURE.md` + `harness/environment/README.md` |
 | writing/editing an instruction or rule | `harness/instructions/instruction-policy.md` |
 | deciding what/how much to build next | `harness/scope/scope-policy.md` (WIP=1) |
+| checking project scope / what "done" means | `harness/scope/feature_list.json` (+ schema) |
 
 ## Hard constraints (the few that always apply — kept here at the end on purpose)
 > Recency effect (L4): the rules most likely to be violated live at a document boundary,
