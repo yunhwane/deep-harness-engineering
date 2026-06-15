@@ -34,6 +34,8 @@
 - **passing 7/7** (F00-F06) · back-pressure 0 · active 0 (WIP=1 ✓)
 - F06 (`?done` filter) added via the **3-agent workflow** (planner→generator→evaluator)
 - `make check` green: arch checks + typecheck + 14 tests (store + health + tasks/F06 + E2E)
+- **Real OpenTelemetry**: runtime request spans + `make trace` decision-layer trace
+  (session→feature→verification). Console exporter; prod-dep audit 0 vulns; tests unaffected.
 
 ## Known issues
 - **5 npm audit advisories (3 moderate, 1 high, 1 critical)**, all in the dev-only

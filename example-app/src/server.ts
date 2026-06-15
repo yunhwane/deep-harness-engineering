@@ -1,4 +1,8 @@
+import { startOtel } from './otel'
 import { buildApp } from './app'
+
+// Register the OTel provider BEFORE building the app so request spans are recorded.
+startOtel('example-app')
 
 // Runtime observability (L11): structured JSON logs for lifecycle + every request.
 const app = buildApp({ logger: true })

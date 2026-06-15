@@ -1,5 +1,11 @@
 import Fastify, { type FastifyInstance, type FastifyServerOptions } from 'fastify'
+import { trace, SpanStatusCode, type Span } from '@opentelemetry/api'
 import { createTask, listTasks, getTask, updateTask, deleteTask } from './store'
+
+// OTel runtime tracing (L11 deepened): one span per HTTP request. No-op unless a provider
+// is registered (server.ts), so tests stay quiet. Span kept off-request via a WeakMap.
+const tracer = trace.getTracer('example-app')
+const requestSpans = new WeakMap<object, Span>()
 
 /**
  * App factory. Returns a configured Fastify instance without listening, so tests can
@@ -13,6 +19,23 @@ import { createTask, listTasks, getTask, updateTask, deleteTask } from './store'
  */
 export function buildApp(opts: { logger?: FastifyServerOptions['logger'] } = {}): FastifyInstance {
   const app = Fastify({ logger: opts.logger ?? false })
+
+  app.addHook('onRequest', async (req) => {
+    const route = req.routeOptions?.url ?? req.url
+    const span = tracer.startSpan(`${req.method} ${route}`, {
+      attributes: { 'http.method': req.method, 'http.target': req.url, 'http.route': route },
+    })
+    requestSpans.set(req, span)
+  })
+
+  app.addHook('onResponse', async (req, reply) => {
+    const span = requestSpans.get(req)
+    if (!span) return
+    span.setAttribute('http.status_code', reply.statusCode)
+    span.setStatus({ code: reply.statusCode >= 500 ? SpanStatusCode.ERROR : SpanStatusCode.OK })
+    span.end()
+    requestSpans.delete(req)
+  })
 
   app.get('/health', async () => ({ status: 'ok' }))
 

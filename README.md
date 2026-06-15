@@ -35,6 +35,9 @@ By the end, the harness here should be one we (and an agent) can genuinely use.
 - **3-agent workflow** (`harness/workflows/three-agent-workflow.md`): added feature F06
   via planner → generator → evaluator with role separation (L9/L11 made real). Verdicts in
   `harness/feedback/verification-log.md`. App now 7/7 features passing.
+- **Real OpenTelemetry** (`docs/deep-dives/otel-integration.md`): runtime request spans +
+  a decision-layer trace (`make trace`: session → feature → verification). Console exporter,
+  no collector needed.
 
 ## The core idea (L1)
 

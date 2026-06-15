@@ -3,7 +3,7 @@
 
 APP := example-app
 
-.PHONY: setup dev test typecheck arch check clean clean-state
+.PHONY: setup dev test typecheck arch check trace clean clean-state
 
 setup:   ## install + lock dependencies from scratch
 	cd $(APP) && npm install
@@ -22,6 +22,9 @@ arch:    ## executable architecture boundary checks (L10)
 
 check:   ## the gate (L9 3 layers): arch + typecheck + tests (incl. E2E)
 	cd $(APP) && bash scripts/check-architecture.sh && npm run typecheck && npm test
+
+trace:   ## emit the decision-layer trace (feature_list -> real OTel spans) to the console
+	cd $(APP) && npx tsx scripts/emit-feature-trace.ts
 
 clean:   ## idempotent cleanup: stop stray servers, remove scratch logs (L12)
 	bash scripts/clean.sh

@@ -18,6 +18,24 @@
 - **Verification log** (`verification-log.md`): the persisted evaluator evidence — which
   verifier accepted which feature, with what observed outputs. This is our decision-layer trace.
 
+## Real OpenTelemetry (L11 deepened)
+Both layers now emit **genuine OTel spans** (real trace_id/span_id/parent linkage),
+exported to the console via a `SimpleSpanProcessor` + `ConsoleSpanExporter` — no external
+collector required. Setup: `example-app/src/otel.ts`. Tracing is **no-op unless a provider
+is registered** (`startOtel()` in `server.ts`), so tests stay silent.
+
+- **Runtime layer:** `src/app.ts` `onRequest`/`onResponse` hooks make one span per HTTP
+  request — name `METHOD /route` (templated, e.g. `GET /tasks/:id`), attributes
+  `http.method`/`http.route`/`http.status_code`. Visible when you `make dev` and hit it.
+- **Decision layer:** `make trace` runs `scripts/emit-feature-trace.ts`, which reads
+  `feature_list.json` and emits one **session** span → a span per **feature** → a
+  **verification** sub-span per passing feature (carrying the evidence/command). This is
+  L11's "trace per session, span per task, sub-span per verification step" — literally,
+  and all under one trace_id.
+
+To send to Jaeger/Zipkin later, swap `ConsoleSpanExporter` for an OTLP exporter in
+`otel.ts`; nothing else changes.
+
 ## Why it belongs inside
 Without it: correctness vs appearance is indistinguishable, evaluation goes mystical,
 retries become blind guessing, and handoffs lose 30-50% of a session to re-diagnosis.
