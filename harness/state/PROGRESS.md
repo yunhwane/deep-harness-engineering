@@ -32,7 +32,7 @@
 
 ## example-app feature progress (from feature_list.json)
 - **passing 6/6** (F00-F05) · back-pressure 0 → feature-complete · active 0 (WIP=1 ✓)
-- `make check` green: arch checks + typecheck + 4 tests (incl. real E2E CRUD flow)
+- `make check` green: arch checks + typecheck + 10 tests (store unit + health + tasks + E2E)
 
 ## Known issues
 - **5 npm audit advisories (3 moderate, 1 high, 1 critical)**, all in the dev-only
