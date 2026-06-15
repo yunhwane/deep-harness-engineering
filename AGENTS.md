@@ -33,7 +33,25 @@ the validation is the **Cold-Start Test** (`harness/diagnostics/cold-start-test.
 can a fresh session answer the 5 questions from repo contents alone?
 
 ## 5. What is the current progress?
-See the checklist in `README.md`. As of now: **L1-L3 complete.** Next: L4.
+See the checklist in `README.md`. As of now: **L1-L4 complete.** Next: L5.
 
-## Working rules
-Hard rules live in `harness/CONSTRAINTS.md`. Read them before changing anything.
+## Where to look (routing — read detail only when the condition matches)
+> Progressive disclosure (L4): this file is a **router**, not an encyclopedia. Load a
+> topic doc only when its *when* applies.
+
+| When you are... | Read |
+|-----------------|------|
+| about to change anything | `harness/CONSTRAINTS.md` (hard MUST/MUST NOT) |
+| studying / building a lecture artifact | `harness/README.md` (five subsystems) + `docs/learning-notes/` |
+| diagnosing an agent failure | `harness/diagnostics/failure-layers.md` |
+| checking if the repo is cold-start-complete | `harness/diagnostics/cold-start-test.md` |
+| touching `example-app/` | `example-app/ARCHITECTURE.md` |
+| writing/editing an instruction or rule | `harness/instructions/instruction-policy.md` |
+
+## Hard constraints (the few that always apply — kept here at the end on purpose)
+> Recency effect (L4): the rules most likely to be violated live at a document boundary,
+> not buried in the middle. Full list with rationale: `harness/CONSTRAINTS.md`.
+1. **Repo is the source of record.** Repo wins over chat/memory.
+2. **No aspirational docs.** Describe what *is*, not what's planned.
+3. **One logical unit of work = one commit.**
+4. **Every `harness/` artifact maps to a failure layer**, or it's decoration — don't add it.

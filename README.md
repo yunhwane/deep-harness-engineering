@@ -20,7 +20,7 @@ By the end, the harness here should be one we (and an agent) can genuinely use.
 - [x] **L1** — Why capable agents still fail → `harness/diagnostics/failure-layers.md`
 - [x] **L2** — What a harness actually is → `harness/README.md` (five subsystems)
 - [x] **L3** — Repository as system of record → `AGENTS.md`, `harness/CONSTRAINTS.md`, Cold-Start Test
-- [ ] L4 — Why one giant instruction file fails
+- [x] **L4** — Why one giant instruction file fails → AGENTS.md routing table + `instruction-policy.md`
 - [ ] L5 — Long-running tasks lose continuity
 - [ ] L6 — Initialization needs its own phase
 - [ ] L7 — Agents overreach and under-finish

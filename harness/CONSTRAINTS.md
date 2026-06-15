@@ -2,6 +2,8 @@
 
 > Non-negotiable rules for working in this repo. Explicit **MUST / MUST NOT** so an
 > agent never has to guess an unwritten convention (the L3 e-commerce failure).
+> Per `instructions/instruction-policy.md` (L4), each rule carries its **source** (why)
+> and, where it's temporary, a **sunset** (when to delete it).
 
 ## Documentation honesty
 - **MUST NOT** write aspirational docs — no documenting commands, tests, or features
@@ -23,4 +25,9 @@
 ## Authority
 - The **repository is the single source of record**. If chat history, memory, or any
   external source conflicts with the repo, the **repo wins** (anti-pattern: *External
-  Authority*).
+  Authority*).  _(source: L3)_
+
+## Interim rules (have a sunset)
+- Until the Feedback subsystem exists, validation = the **Cold-Start Test**
+  (`diagnostics/cold-start-test.md`). _(source: L3 · **sunset:** delete once automated
+  validation lands in L9-L11.)_
