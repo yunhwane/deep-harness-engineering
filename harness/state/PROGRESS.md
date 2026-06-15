@@ -4,11 +4,11 @@
 > working state in minutes, not by re-exploring. Keep it current — stale = worse than none.
 
 ## Current status
-- **Latest commit:** `6f81bdf` (L11: observability)
+- **Latest commit:** `8d488f6` (deeper: OTLP + Jaeger)
 - **Stack:** Node 26 + TypeScript + Fastify + vitest (`example-app/`)
-- **Tests:** `make check` green — `tsc` clean + 1 test (`GET /health`)
-- **Server:** boots; `curl :PORT/health → {"status":"ok"}`
-- **Lint:** none yet (arrives with Feedback subsystem, L9)
+- **Tests:** `make check` green — `tsc` clean + arch checks + 19 tests (store + health + tasks/F06/F07 + E2E)
+- **Server:** boots; `curl :PORT/health → {"status":"ok"}`; Task API F00-F07 live
+- **Features:** passing 8/8 (F00-F07); WIP=1 ✓ (active 0)
 - **Cold-Start Test:** passing — `AGENTS.md` answers all 5 questions
 
 ## Completed
@@ -50,11 +50,10 @@
   `vitest → vite → esbuild` chain (esbuild GHSA-gv7w-rqvm-qjhr, NPM_CONFIG_REGISTRY RCE).
   Not in shipped code. Fix needs `vitest@4` (breaking). **Deferred on purpose** — see
   DECISIONS.md. Revisit if example-app ever ships.
-- "Latest commit" line lags one checkpoint by design; reconcile at each onboarding.
 
 ## Next steps (priority order)
-- Curriculum complete. Optional follow-ups: give `store.ts` a direct unit test
-  (quality-report priority #1); revisit deferred npm dev-dep advisories if app ships.
+- Curriculum complete. `store.ts` now has a direct unit test (`test/store.test.ts`, 6 tests).
+  Optional follow-up: revisit deferred npm dev-dep advisories if app ships.
 
 ## How to resume (onboarding)
 Read this file → read `harness/state/DECISIONS.md` → check `README.md` progress →
