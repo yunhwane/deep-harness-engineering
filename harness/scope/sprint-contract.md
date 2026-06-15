@@ -18,6 +18,18 @@ Each lecture has effectively been a one-feature sprint contract:
 - **Validation:** `make check` + the feature's verification + independent verifier.
 - **Exclusions:** other features stay `not_started` (WIP=1, L7) — e.g. L9 touched only F01.
 
+## Live contract — F06 (planner agent adcb38, 2026-06-15)
+```
+## 2026-06-15 — implement F06 GET /tasks ?done filter (true/false/all, invalid -> 400)
+- In scope: src/app.ts (GET /tasks handler), src/store.ts (only if a helper helps),
+  test/tasks.test.ts (true/false/none/invalid), test/e2e/crud.e2e.test.ts (extend flow)
+- Per-item validation: ?done=true -> only done:true; ?done=false -> only done:false;
+  no param -> all (F02 regression); ?done=maybe -> 400; gate: make check green
+- Out of scope: F00-F05 behavior unchanged; no other query params (no pagination/sort/search);
+  no storage change; only exact true/false valid (no "1"/"yes"/case-insensitive); no unrelated refactor
+- Definition of done: 3-layer gate + independent verifier rubric all-PASS -> harness flips F06 passing
+```
+
 ## Worked example (L9)
 ```
 ## 2026-06-15 — implement F01 POST /tasks

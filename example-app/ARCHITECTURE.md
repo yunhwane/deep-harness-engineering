@@ -23,9 +23,10 @@ harness something real to define, verify, and track. Scope is kept tiny on purpo
 - `src/store.ts` — in-memory task store (`Map`), module-level, with `reset()` (decided L9).
 
 ## Status (mirrors feature_list.json — that file is authoritative)
-All features **passing (6/6)**:
+All features **passing (7/7)**:
 - `GET /health` (F00), `POST /tasks` (F01), `GET /tasks` (F02), `GET /tasks/:id` (F03),
-  `PATCH /tasks/:id` (F04), `DELETE /tasks/:id` (F05). Unknown ids → 404; bad bodies → 400.
+  `PATCH /tasks/:id` (F04), `DELETE /tasks/:id` (F05), `GET /tasks?done=` filter (F06).
+- Unknown ids → 404; bad bodies / invalid `done` → 400.
 - Validate with `make check` (architecture checks + typecheck + unit/integration + E2E).
 
 ## Boundaries (enforced by scripts/check-architecture.sh)

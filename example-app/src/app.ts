@@ -27,8 +27,16 @@ export function buildApp(opts: { logger?: FastifyServerOptions['logger'] } = {})
     return createTask(body.title)
   })
 
-  // F02: list tasks
-  app.get('/tasks', async () => listTasks())
+  // F02: list tasks; F06: optional `done` filter (?done=true|false), 400 on any other value
+  app.get('/tasks', async (req, reply) => {
+    const { done } = req.query as { done?: string }
+    if (done === undefined) return listTasks()
+    if (done !== 'true' && done !== 'false') {
+      return reply.code(400).send({ error: "done must be 'true' or 'false'" })
+    }
+    const wantDone = done === 'true'
+    return listTasks().filter((t) => t.done === wantDone)
+  })
 
   // F03: read one task (404 if unknown)
   app.get('/tasks/:id', async (req, reply) => {

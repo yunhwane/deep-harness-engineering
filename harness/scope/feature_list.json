@@ -54,6 +54,14 @@
       "verification": "make check (E2E flow asserts DELETE 204, then GET -> 404, and DELETE unknown -> 404)",
       "state": "passing",
       "evidence": "test/e2e/crud.e2e.test.ts; make check green; independent verifier ad737b PASS (204, then 404, delete-unknown 404) 2026-06-15"
+    },
+    {
+      "id": "F06",
+      "behavior": "GET /tasks supports an optional `done` query param: ?done=true returns only completed tasks, ?done=false only incomplete, no param returns all; an invalid value (e.g. ?done=maybe) returns 400",
+      "verification": "make check (E2E asserts ?done=true/false filtering, no-param returns all, ?done=maybe -> 400)",
+      "state": "passing",
+      "evidence": "3-agent workflow: planner adcb38 -> generator a23512 -> evaluator a47cf8 (rubric all-PASS, live curl incl. ?done= empty -> 400); make check green (14 tests); 2026-06-15",
+      "planned_by": "planner agent adcb38 (sprint contract 2026-06-15)"
     }
   ]
 }

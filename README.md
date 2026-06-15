@@ -30,6 +30,12 @@ By the end, the harness here should be one we (and an agent) can genuinely use.
 - [x] **L11** — Observability inside the harness → structured logs + `evaluator-rubric.md`, `verification-log.md`
 - [x] **L12** — Every session must leave a clean state → `make clean-state`, harness simplification
 
+## Beyond the curriculum
+
+- **3-agent workflow** (`harness/workflows/three-agent-workflow.md`): added feature F06
+  via planner → generator → evaluator with role separation (L9/L11 made real). Verdicts in
+  `harness/feedback/verification-log.md`. App now 7/7 features passing.
+
 ## The core idea (L1)
 
 Model capability ≠ execution reliability. Identical model + prompt produces wildly

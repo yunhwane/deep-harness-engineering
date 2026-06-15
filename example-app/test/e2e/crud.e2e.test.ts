@@ -73,6 +73,42 @@ describe('E2E: Task API full CRUD flow', () => {
     })
     expect(r.status).toBe(404)
 
+    // F06 filter: add a second (incomplete) task so the store holds one done + one open
+    r = await fetch(`${base}/tasks`, {
+      method: 'POST',
+      headers: json,
+      body: JSON.stringify({ title: 'still open' }),
+    })
+    expect(r.status).toBe(201)
+    const openId: string = (await r.json()).id
+
+    // ?done=true → only the completed task
+    r = await fetch(`${base}/tasks?done=true`)
+    expect(r.status).toBe(200)
+    let filtered = await r.json()
+    expect(Array.isArray(filtered)).toBe(true)
+    expect(filtered.map((t: { id: string }) => t.id)).toEqual([id])
+
+    // ?done=false → only the incomplete task
+    r = await fetch(`${base}/tasks?done=false`)
+    expect(r.status).toBe(200)
+    filtered = await r.json()
+    expect(filtered.map((t: { id: string }) => t.id)).toEqual([openId])
+
+    // no param → all tasks (unchanged behavior)
+    r = await fetch(`${base}/tasks`)
+    expect(r.status).toBe(200)
+    expect((await r.json())).toHaveLength(2)
+
+    // invalid value → 400
+    r = await fetch(`${base}/tasks?done=maybe`)
+    expect(r.status).toBe(400)
+    expect(await r.json()).toHaveProperty('error')
+
+    // tidy up the extra task so the delete-flow below is unaffected
+    r = await fetch(`${base}/tasks/${openId}`, { method: 'DELETE' })
+    expect(r.status).toBe(204)
+
     // F05 delete → 204
     r = await fetch(`${base}/tasks/${id}`, { method: 'DELETE' })
     expect(r.status).toBe(204)
