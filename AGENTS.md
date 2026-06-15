@@ -33,7 +33,14 @@ the validation is the **Cold-Start Test** (`harness/diagnostics/cold-start-test.
 can a fresh session answer the 5 questions from repo contents alone?
 
 ## 5. What is the current progress?
-See the checklist in `README.md`. As of now: **L1-L4 complete.** Next: L5.
+Authoritative state: `harness/state/PROGRESS.md`. Summary in `README.md`.
+As of now: **L1-L5 complete.** Next: L6.
+
+## Session routines (L5 — survive session boundaries & compaction)
+**Onboarding (start):** read `harness/state/PROGRESS.md` → skim `harness/state/DECISIONS.md`
+(the *why*) → (once it exists) run `make check` → resume from PROGRESS "Next steps".
+**Offboarding (end):** update `PROGRESS.md` → verify consistency → commit completed work.
+Begin handoff prep when a task needs ~60%+ of the context window.
 
 ## Where to look (routing — read detail only when the condition matches)
 > Progressive disclosure (L4): this file is a **router**, not an encyclopedia. Load a
@@ -43,6 +50,7 @@ See the checklist in `README.md`. As of now: **L1-L4 complete.** Next: L5.
 |-----------------|------|
 | about to change anything | `harness/CONSTRAINTS.md` (hard MUST/MUST NOT) |
 | studying / building a lecture artifact | `harness/README.md` (five subsystems) + `docs/learning-notes/` |
+| resuming work / checking state | `harness/state/PROGRESS.md` then `DECISIONS.md` |
 | diagnosing an agent failure | `harness/diagnostics/failure-layers.md` |
 | checking if the repo is cold-start-complete | `harness/diagnostics/cold-start-test.md` |
 | touching `example-app/` | `example-app/ARCHITECTURE.md` |

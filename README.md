@@ -21,7 +21,7 @@ By the end, the harness here should be one we (and an agent) can genuinely use.
 - [x] **L2** — What a harness actually is → `harness/README.md` (five subsystems)
 - [x] **L3** — Repository as system of record → `AGENTS.md`, `harness/CONSTRAINTS.md`, Cold-Start Test
 - [x] **L4** — Why one giant instruction file fails → AGENTS.md routing table + `instruction-policy.md`
-- [ ] L5 — Long-running tasks lose continuity
+- [x] **L5** — Long-running tasks lose continuity → `harness/state/PROGRESS.md` + `DECISIONS.md`
 - [ ] L6 — Initialization needs its own phase
 - [ ] L7 — Agents overreach and under-finish
 - [ ] L8 — Feature lists are harness primitives
