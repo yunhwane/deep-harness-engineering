@@ -31,7 +31,10 @@
 - (nothing — curriculum done)
 
 ## example-app feature progress (from feature_list.json)
-- **passing 7/7** (F00-F06) · back-pressure 0 · active 0 (WIP=1 ✓)
+- **passing 8/8** (F00-F07) · back-pressure 0 · active 0 (WIP=1 ✓)
+- F07 (`/tasks/stats`) added via the **automated feature-pipeline workflow**; first panel
+  vote was 0/3 (caught a process gap: feature absent from scope surface + args bug), harness
+  fixed it, re-vote 3/3 Accept. See verification-log.md + docs/deep-dives.
 - F06 (`?done` filter) added via the **3-agent workflow** (planner→generator→evaluator)
 - `make check` green: arch checks + typecheck + 14 tests (store + health + tasks/F06 + E2E)
 - **Real OpenTelemetry**: runtime request spans + `make trace` decision-layer trace

@@ -38,6 +38,10 @@ By the end, the harness here should be one we (and an agent) can genuinely use.
 - **Real OpenTelemetry** (`docs/deep-dives/otel-integration.md`): runtime request spans +
   a decision-layer trace (`make trace`: session → feature → verification). Console exporter,
   no collector needed.
+- **Automated workflow + majority vote** (`harness/workflows/feature-pipeline.mjs`): a
+  reusable Plan→Generate→3-evaluator-panel pipeline. Added F07 (`/tasks/stats`); the panel's
+  first vote (0/3) caught a process gap a single review missed, harness fixed it, re-vote 3/3.
+  App now **8/8 features passing**.
 - **Resource Library gap analysis** (`docs/deep-dives/resource-library-gap-analysis.md`):
   compared against the official curriculum templates; closed `init.sh`, `pwd`/`git log`
   onboarding, scope-state clean check, richer evaluator rubric, session-handoff template.

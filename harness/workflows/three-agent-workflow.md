@@ -28,5 +28,23 @@ orchestrator names the feature
 - **Evaluator is independent + rubric-driven** → reproducible, evidence-based acceptance (L9/L11).
 - Every transition is recorded (`verification-log.md`) → decision-layer observability (L11).
 
+## Automated variant: `feature-pipeline.mjs` (+ majority vote)
+`harness/workflows/feature-pipeline.mjs` runs the whole pipeline deterministically as a
+reusable script: Plan → Generate → an **evaluator panel of N=3**, accepted only on a
+**majority Accept** vote. Re-run for any feature via `args: {id, idea}`.
+
+### What the panel caught (F07, real run)
+Round 1 returned **0/3 Accept** — not a code defect (all 3 confirmed the behavior live and
+`make check` green) but a **process gap**: F07 wasn't in `feature_list.json` (the source of
+truth), the work was uncommitted, and an `args`-passing bug fed evaluators an "undefined"
+feature id. A single-pass review (our manual F06) had masked this because the harness added
+the scope row first. The harness fixed both causes, re-ran the panel → **3/3 Accept**. The
+vote earned its keep: it rejected a setup that *looked* done. (See `verification-log.md`.)
+
+### Harness contract the run taught us
+Workflow scripts can't write files, so the **harness** must insert the planner's feature
+entry into `feature_list.json` (as `not_started`) *before* the evaluate phase — encoded as
+a comment at the top of `feature-pipeline.mjs`.
+
 ## Live runs
-See `harness/feedback/verification-log.md` for verdicts produced by this workflow.
+See `harness/feedback/verification-log.md` for verdicts produced by these workflows.

@@ -29,8 +29,17 @@ describe('E2E: Task API full CRUD flow', () => {
   it('create → list → get → patch → delete, with 404 failure paths', async () => {
     const json = { 'content-type': 'application/json' }
 
+    // F07 stats baseline — delta-based so it is independent of any pre-existing store state.
+    let r = await fetch(`${base}/tasks/stats`)
+    expect(r.status).toBe(200)
+    const base0 = await r.json()
+    expect(typeof base0.total).toBe('number')
+    expect(typeof base0.done).toBe('number')
+    expect(typeof base0.pending).toBe('number')
+    expect(base0.done + base0.pending).toBe(base0.total)
+
     // F01 create
-    let r = await fetch(`${base}/tasks`, {
+    r = await fetch(`${base}/tasks`, {
       method: 'POST',
       headers: json,
       body: JSON.stringify({ title: 'write e2e tests' }),
@@ -65,6 +74,14 @@ describe('E2E: Task API full CRUD flow', () => {
     expect(r.status).toBe(200)
     expect((await r.json()).done).toBe(true)
 
+    // F07 stats after creating 1 task and marking it done: total +1, done +1 vs baseline.
+    r = await fetch(`${base}/tasks/stats`)
+    expect(r.status).toBe(200)
+    let stats = await r.json()
+    expect(stats.total).toBe(base0.total + 1)
+    expect(stats.done).toBe(base0.done + 1)
+    expect(stats.done + stats.pending).toBe(stats.total)
+
     // F04 failure path: patch unknown id → 404
     r = await fetch(`${base}/tasks/does-not-exist`, {
       method: 'PATCH',
@@ -81,6 +98,16 @@ describe('E2E: Task API full CRUD flow', () => {
     })
     expect(r.status).toBe(201)
     const openId: string = (await r.json()).id
+
+    // F07 stats after creating 2 tasks total (N=2), 1 marked done (k=1):
+    // total +2 and done +1 vs baseline; the new task is pending.
+    r = await fetch(`${base}/tasks/stats`)
+    expect(r.status).toBe(200)
+    stats = await r.json()
+    expect(stats.total).toBe(base0.total + 2)
+    expect(stats.done).toBe(base0.done + 1)
+    expect(stats.pending).toBe(base0.pending + 1)
+    expect(stats.done + stats.pending).toBe(stats.total)
 
     // ?done=true → only the completed task
     r = await fetch(`${base}/tasks?done=true`)

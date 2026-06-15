@@ -77,3 +77,60 @@ describe('F06: GET /tasks?done filter', () => {
     await app.close()
   })
 })
+
+describe('F07: GET /tasks/stats', () => {
+  it('empty store → all zeros', async () => {
+    reset()
+    const app = buildApp()
+    const res = await app.inject({ method: 'GET', url: '/tasks/stats' })
+    expect(res.statusCode).toBe(200)
+    expect(res.json()).toEqual({ total: 0, done: 0, pending: 0 })
+    await app.close()
+  })
+
+  it('mixed store → correct total/done/pending with done+pending===total', async () => {
+    reset()
+    const app = buildApp()
+    const a = (await app.inject({ method: 'POST', url: '/tasks', payload: { title: 'a' } })).json()
+    const b = (await app.inject({ method: 'POST', url: '/tasks', payload: { title: 'b' } })).json()
+    await app.inject({ method: 'POST', url: '/tasks', payload: { title: 'c' } })
+    await app.inject({ method: 'PATCH', url: `/tasks/${a.id}`, payload: { done: true } })
+    await app.inject({ method: 'PATCH', url: `/tasks/${b.id}`, payload: { done: true } })
+
+    const res = await app.inject({ method: 'GET', url: '/tasks/stats' })
+    expect(res.statusCode).toBe(200)
+    const body = res.json()
+    expect(body).toEqual({ total: 3, done: 2, pending: 1 })
+    expect(body.done + body.pending).toBe(body.total)
+    await app.close()
+  })
+
+  it('body has exactly the 3 numeric keys', async () => {
+    reset()
+    const app = buildApp()
+    await app.inject({ method: 'POST', url: '/tasks', payload: { title: 'x' } })
+    const body = (await app.inject({ method: 'GET', url: '/tasks/stats' })).json()
+    expect(Object.keys(body).sort()).toEqual(['done', 'pending', 'total'])
+    for (const k of ['total', 'done', 'pending']) expect(typeof body[k]).toBe('number')
+    await app.close()
+  })
+
+  it('route precedence: /tasks/stats hits stats handler, not /tasks/:id 404', async () => {
+    reset()
+    const app = buildApp()
+    const res = await app.inject({ method: 'GET', url: '/tasks/stats' })
+    expect(res.statusCode).toBe(200)
+    expect(res.json()).not.toHaveProperty('error')
+    await app.close()
+  })
+
+  it('F02 regression: GET /tasks still returns a JSON array', async () => {
+    reset()
+    const app = buildApp()
+    await app.inject({ method: 'POST', url: '/tasks', payload: { title: 'still listed' } })
+    const res = await app.inject({ method: 'GET', url: '/tasks' })
+    expect(res.statusCode).toBe(200)
+    expect(Array.isArray(res.json())).toBe(true)
+    await app.close()
+  })
+})

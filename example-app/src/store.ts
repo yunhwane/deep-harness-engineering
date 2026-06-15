@@ -25,6 +25,20 @@ export function getTask(id: string): Task | undefined {
   return tasks.get(id)
 }
 
+export interface TaskStats {
+  total: number
+  done: number
+  pending: number
+}
+
+// F07: task counts. `done + pending === total` by construction.
+export function statsTasks(): TaskStats {
+  let done = 0
+  for (const task of tasks.values()) if (task.done) done++
+  const total = tasks.size
+  return { total, done, pending: total - done }
+}
+
 export function updateTask(
   id: string,
   patch: { title?: string; done?: boolean },

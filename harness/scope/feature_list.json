@@ -62,6 +62,14 @@
       "state": "passing",
       "evidence": "3-agent workflow: planner adcb38 -> generator a23512 -> evaluator a47cf8 (rubric all-PASS, live curl incl. ?done= empty -> 400); make check green (14 tests); 2026-06-15",
       "planned_by": "planner agent adcb38 (sprint contract 2026-06-15)"
+    },
+    {
+      "id": "F07",
+      "behavior": "GET /tasks/stats returns 200 with JSON {total, done, pending} where done+pending===total; empty store -> all zeros; the static route is not shadowed by GET /tasks/:id",
+      "verification": "make check (unit+E2E assert {total,done,pending}, invariant done+pending===total, empty->zeros, route precedence vs /tasks/:id)",
+      "state": "passing",
+      "evidence": "feature-pipeline workflow. Round 1: panel 0/3 Accept (2 Revise + 1 Block) — caught a process gap (F07 absent from scope surface + an args bug), not a code defect. Harness fixed both. Round 2: panel 3/3 Accept (a0c806, a74807, a39efe), all 8 rubric dims PASS, live curl + make check 19 green; 2026-06-15",
+      "planned_by": "feature-pipeline workflow, planner phase (2026-06-15)"
     }
   ]
 }

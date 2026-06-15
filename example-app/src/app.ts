@@ -1,6 +1,6 @@
 import Fastify, { type FastifyInstance, type FastifyServerOptions } from 'fastify'
 import { trace, SpanStatusCode, type Span } from '@opentelemetry/api'
-import { createTask, listTasks, getTask, updateTask, deleteTask } from './store'
+import { createTask, listTasks, getTask, updateTask, deleteTask, statsTasks } from './store'
 
 // OTel runtime tracing (L11 deepened): one span per HTTP request. No-op unless a provider
 // is registered (server.ts), so tests stay quiet. Span kept off-request via a WeakMap.
@@ -60,6 +60,11 @@ export function buildApp(opts: { logger?: FastifyServerOptions['logger'] } = {})
     const wantDone = done === 'true'
     return listTasks().filter((t) => t.done === wantDone)
   })
+
+  // F07: task counts. Static route registered before `/tasks/:id` so the parametric
+  // route never swallows it (Fastify prefers static > parametric regardless, but being
+  // explicit keeps the precedence obvious).
+  app.get('/tasks/stats', async () => statsTasks())
 
   // F03: read one task (404 if unknown)
   app.get('/tasks/:id', async (req, reply) => {
