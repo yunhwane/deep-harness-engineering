@@ -23,18 +23,19 @@ example-app/         the "horse": a small Task API, developed under the harness
 ```
 
 ## 3. How do you run it?
-Nothing to run yet. `example-app/` has **no code** — we add features only once the
-harness can define, verify, and track them (around L8). Studying = read a lecture,
-write `docs/learning-notes/Lxx-*.md`, build the matching harness artifact.
+`make setup` then `make dev` (server on :3000). `example-app/` is Node + TypeScript +
+Fastify; only a `/health` route exists so far (Task API routes arrive with the feature
+list, L8). Studying = read a lecture, write `docs/learning-notes/Lxx-*.md`, build the
+matching harness artifact. Bootstrap details: `harness/environment/README.md`.
 
 ## 4. How do you validate it?
-No automated validation yet (the Feedback subsystem is built in L9-L11). Until then,
-the validation is the **Cold-Start Test** (`harness/diagnostics/cold-start-test.md`):
-can a fresh session answer the 5 questions from repo contents alone?
+`make check` (TypeScript typecheck + vitest). One test passes today (`GET /health`).
+The full Feedback subsystem (lint, E2E, observability) lands in L9-L11. The repo-level
+check is still the **Cold-Start Test** (`harness/diagnostics/cold-start-test.md`).
 
 ## 5. What is the current progress?
 Authoritative state: `harness/state/PROGRESS.md`. Summary in `README.md`.
-As of now: **L1-L5 complete.** Next: L6.
+As of now: **L1-L6 complete.** Next: L7.
 
 ## Session routines (L5 — survive session boundaries & compaction)
 **Onboarding (start):** read `harness/state/PROGRESS.md` → skim `harness/state/DECISIONS.md`
@@ -53,7 +54,7 @@ Begin handoff prep when a task needs ~60%+ of the context window.
 | resuming work / checking state | `harness/state/PROGRESS.md` then `DECISIONS.md` |
 | diagnosing an agent failure | `harness/diagnostics/failure-layers.md` |
 | checking if the repo is cold-start-complete | `harness/diagnostics/cold-start-test.md` |
-| touching `example-app/` | `example-app/ARCHITECTURE.md` |
+| touching `example-app/` | `example-app/ARCHITECTURE.md` + `harness/environment/README.md` |
 | writing/editing an instruction or rule | `harness/instructions/instruction-policy.md` |
 
 ## Hard constraints (the few that always apply — kept here at the end on purpose)

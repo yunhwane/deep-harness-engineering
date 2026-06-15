@@ -4,9 +4,11 @@
 > working state in minutes, not by re-exploring. Keep it current — stale = worse than none.
 
 ## Current status
-- **Latest commit:** `0b9c98b` (L4: distribute instructions)
-- **Tests:** none yet (no app code; Feedback subsystem arrives L9-L11)
-- **Lint:** none yet
+- **Latest commit:** `905f402` (L5) — reconcile to L6 hash at next onboarding
+- **Stack:** Node 26 + TypeScript + Fastify + vitest (`example-app/`)
+- **Tests:** `make check` green — `tsc` clean + 1 test (`GET /health`)
+- **Server:** boots; `curl :PORT/health → {"status":"ok"}`
+- **Lint:** none yet (arrives with Feedback subsystem, L9)
 - **Cold-Start Test:** passing — `AGENTS.md` answers all 5 questions
 
 ## Completed
@@ -15,19 +17,22 @@
 - [x] L3 — git init, AGENTS.md, CONSTRAINTS.md, cold-start test
 - [x] L4 — routing table + instruction policy
 - [x] L5 — PROGRESS.md + DECISIONS.md + session routines
+- [x] L6 — initialization phase: Node/TS/Fastify env, Makefile, passing test
 
 ## In progress
 - (nothing — between lectures)
 
 ## Known issues
-- None. (When the app exists, failing tests get named here with *why*.)
-- The "Latest commit" line lags one checkpoint by design: offboarding writes it, next
-  onboarding reconciles it to the just-made commit. Reconcile at start of L6.
+- **5 npm audit advisories (3 moderate, 1 high, 1 critical)**, all in the dev-only
+  `vitest → vite → esbuild` chain (esbuild GHSA-gv7w-rqvm-qjhr, NPM_CONFIG_REGISTRY RCE).
+  Not in shipped code. Fix needs `vitest@4` (breaking). **Deferred on purpose** — see
+  DECISIONS.md. Revisit if example-app ever ships.
+- "Latest commit" line lags one checkpoint by design; reconcile at each onboarding.
 
 ## Next steps (priority order)
-1. L6 — initialization phase; **decide example-app stack/runtime** (currently undecided).
-2. L7 — scope control (overreach/under-finish).
-3. L8 — feature_list.json (then example-app gets its first real spec).
+1. L7 — scope control (overreach/under-finish).
+2. L8 — feature_list.json (then example-app gets its first real CRUD spec + routes).
+3. L9 — Definition of Done / victory verification.
 
 ## How to resume (onboarding)
 Read this file → read `harness/state/DECISIONS.md` → check `README.md` progress →

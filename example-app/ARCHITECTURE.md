@@ -16,9 +16,13 @@ harness something real to define, verify, and track. Scope is kept tiny on purpo
 | PATCH  | `/tasks/:id` | update a task |
 | DELETE | `/tasks/:id` | delete a task |
 
-## Constraints (will harden over later lectures)
-- Stack/runtime: **undecided** — chosen when the Environment subsystem is built (L6).
-- No persistence decisions yet. Recorded here so the choice is visible when made.
+## Stack (decided L6)
+- Node 26 + TypeScript (Bundler module resolution) + **Fastify** + **vitest**.
+- `src/app.ts` exports `buildApp()` (factory, no listen) so tests use `app.inject(...)`.
+- `src/server.ts` is the listen entrypoint. Run via `make dev`.
+- Persistence: **undecided** — decide when the first write route is implemented (L8+).
 
 ## Status
-**Not implemented.** No source files exist. See `README.md` (root) for why we wait.
+**Infrastructure only (L6).** Routes implemented: `GET /health`. None of the Task CRUD
+routes exist yet — they arrive once the feature list governs them (L8). Validate with
+`make check` from repo root.
