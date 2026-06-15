@@ -23,7 +23,7 @@ By the end, the harness here should be one we (and an agent) can genuinely use.
 - [x] **L4** — Why one giant instruction file fails → AGENTS.md routing table + `instruction-policy.md`
 - [x] **L5** — Long-running tasks lose continuity → `harness/state/PROGRESS.md` + `DECISIONS.md`
 - [x] **L6** — Initialization needs its own phase → Node/TS env, `Makefile`, passing test
-- [ ] L7 — Agents overreach and under-finish
+- [x] **L7** — Agents overreach and under-finish → `harness/scope/scope-policy.md` (WIP=1)
 - [ ] L8 — Feature lists are harness primitives
 - [ ] L9 — Agents declare victory too early
 - [ ] L10 — E2E testing changes results

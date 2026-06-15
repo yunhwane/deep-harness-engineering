@@ -17,6 +17,13 @@
 - Instruction files **MUST** stay maps, not manuals: AGENTS.md ~100 lines, pointing
   to detail rather than inlining it (L2 principle #2).
 
+## Scope (WIP=1)
+- **MUST** keep Work-in-Progress = 1: exactly one task `active`; finish + verify before
+  starting the next. No multi-tasking as "optimization". _(source: L7)_
+- "Done" **MUST** mean **executable evidence** (a passing command), never "looks right".
+  _(source: L7 — full policy: `scope/scope-policy.md`)_
+- Task state **MUST** live in a file (the scope surface), not only in the conversation. _(source: L7)_
+
 ## State / ACID
 - One logical unit of work = one commit (**Atomicity**). No half-done states committed.
 - **MUST** keep `README.md` progress checklist and `AGENTS.md` §5 in sync with reality

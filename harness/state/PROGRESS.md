@@ -4,7 +4,7 @@
 > working state in minutes, not by re-exploring. Keep it current — stale = worse than none.
 
 ## Current status
-- **Latest commit:** `905f402` (L5) — reconcile to L6 hash at next onboarding
+- **Latest commit:** `5b57417` (L6: initialization phase)
 - **Stack:** Node 26 + TypeScript + Fastify + vitest (`example-app/`)
 - **Tests:** `make check` green — `tsc` clean + 1 test (`GET /health`)
 - **Server:** boots; `curl :PORT/health → {"status":"ok"}`
@@ -18,6 +18,7 @@
 - [x] L4 — routing table + instruction policy
 - [x] L5 — PROGRESS.md + DECISIONS.md + session routines
 - [x] L6 — initialization phase: Node/TS/Fastify env, Makefile, passing test
+- [x] L7 — scope policy (WIP=1, completion evidence, VCR)
 
 ## In progress
 - (nothing — between lectures)
@@ -30,9 +31,9 @@
 - "Latest commit" line lags one checkpoint by design; reconcile at each onboarding.
 
 ## Next steps (priority order)
-1. L7 — scope control (overreach/under-finish).
-2. L8 — feature_list.json (then example-app gets its first real CRUD spec + routes).
-3. L9 — Definition of Done / victory verification.
+1. L8 — feature_list.json (the scope surface) + example-app's first real CRUD spec.
+2. L9 — Definition of Done / victory verification.
+3. L10 — E2E testing.
 
 ## How to resume (onboarding)
 Read this file → read `harness/state/DECISIONS.md` → check `README.md` progress →

@@ -35,7 +35,7 @@ check is still the **Cold-Start Test** (`harness/diagnostics/cold-start-test.md`
 
 ## 5. What is the current progress?
 Authoritative state: `harness/state/PROGRESS.md`. Summary in `README.md`.
-As of now: **L1-L6 complete.** Next: L7.
+As of now: **L1-L7 complete.** Next: L8.
 
 ## Session routines (L5 — survive session boundaries & compaction)
 **Onboarding (start):** read `harness/state/PROGRESS.md` → skim `harness/state/DECISIONS.md`
@@ -56,6 +56,7 @@ Begin handoff prep when a task needs ~60%+ of the context window.
 | checking if the repo is cold-start-complete | `harness/diagnostics/cold-start-test.md` |
 | touching `example-app/` | `example-app/ARCHITECTURE.md` + `harness/environment/README.md` |
 | writing/editing an instruction or rule | `harness/instructions/instruction-policy.md` |
+| deciding what/how much to build next | `harness/scope/scope-policy.md` (WIP=1) |
 
 ## Hard constraints (the few that always apply — kept here at the end on purpose)
 > Recency effect (L4): the rules most likely to be violated live at a document boundary,
@@ -64,3 +65,4 @@ Begin handoff prep when a task needs ~60%+ of the context window.
 2. **No aspirational docs.** Describe what *is*, not what's planned.
 3. **One logical unit of work = one commit.**
 4. **Every `harness/` artifact maps to a failure layer**, or it's decoration — don't add it.
+5. **WIP = 1.** One task active; finish + verify (executable evidence) before the next.
