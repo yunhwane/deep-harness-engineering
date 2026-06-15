@@ -3,7 +3,7 @@
 
 APP := example-app
 
-.PHONY: setup dev test typecheck arch check
+.PHONY: setup dev test typecheck arch check clean clean-state
 
 setup:   ## install + lock dependencies from scratch
 	cd $(APP) && npm install
@@ -22,3 +22,9 @@ arch:    ## executable architecture boundary checks (L10)
 
 check:   ## the gate (L9 3 layers): arch + typecheck + tests (incl. E2E)
 	cd $(APP) && bash scripts/check-architecture.sh && npm run typecheck && npm test
+
+clean:   ## idempotent cleanup: stop stray servers, remove scratch logs (L12)
+	bash scripts/clean.sh
+
+clean-state: ## L12 session-completion gate: clean + check + git tree clean
+	bash scripts/clean-state.sh

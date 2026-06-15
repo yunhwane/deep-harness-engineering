@@ -4,7 +4,7 @@
 > working state in minutes, not by re-exploring. Keep it current — stale = worse than none.
 
 ## Current status
-- **Latest commit:** `591d139` (L10: E2E + arch checks; app 6/6)
+- **Latest commit:** `6f81bdf` (L11: observability)
 - **Stack:** Node 26 + TypeScript + Fastify + vitest (`example-app/`)
 - **Tests:** `make check` green — `tsc` clean + 1 test (`GET /health`)
 - **Server:** boots; `curl :PORT/health → {"status":"ok"}`
@@ -23,9 +23,12 @@
 - [x] L9 — Definition of Done (3-layer gate); F01 POST /tasks driven to passing via independent verifier
 - [x] L10 — real E2E harness + executable arch checks; F02-F05 implemented & verified
 - [x] L11 — observability: structured runtime logs + rubric/sprint-contract/verification-log
+- [x] L12 — clean-state: `make clean`/`clean-state`, session-completion def, harness simplification
+
+## Curriculum COMPLETE — all 12 lectures studied and applied.
 
 ## In progress
-- (nothing — between lectures)
+- (nothing — curriculum done)
 
 ## example-app feature progress (from feature_list.json)
 - **passing 6/6** (F00-F05) · back-pressure 0 → feature-complete · active 0 (WIP=1 ✓)
@@ -39,7 +42,8 @@
 - "Latest commit" line lags one checkpoint by design; reconcile at each onboarding.
 
 ## Next steps (priority order)
-1. L12 — every session must leave a clean state (final lecture).
+- Curriculum complete. Optional follow-ups: give `store.ts` a direct unit test
+  (quality-report priority #1); revisit deferred npm dev-dep advisories if app ships.
 
 ## How to resume (onboarding)
 Read this file → read `harness/state/DECISIONS.md` → check `README.md` progress →

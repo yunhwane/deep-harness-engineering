@@ -29,19 +29,21 @@ list, L8). Studying = read a lecture, write `docs/learning-notes/Lxx-*.md`, buil
 matching harness artifact. Bootstrap details: `harness/environment/README.md`.
 
 ## 4. How do you validate it?
-`make check` (TypeScript typecheck + vitest). One test passes today (`GET /health`).
-The full Feedback subsystem (lint, E2E, observability) lands in L9-L11. The repo-level
-check is still the **Cold-Start Test** (`harness/diagnostics/cold-start-test.md`).
+Primary gate: **`make check`** (architecture checks + typecheck + unit/integration + real
+E2E). Session-completion gate: **`make clean-state`** (build, test, progress committed, no
+stray artifacts — L12). The **Cold-Start Test** (`harness/diagnostics/cold-start-test.md`)
+remains a complementary repo-completeness check (no longer the primary gate).
 
 ## 5. What is the current progress?
 Authoritative state: `harness/state/PROGRESS.md`. Summary in `README.md`.
-As of now: **L1-L11 complete.** example-app feature-complete (6/6). Next: L12.
+As of now: **all 12 lectures complete.** example-app feature-complete (6/6).
 
 ## Session routines (L5 — survive session boundaries & compaction)
 **Onboarding (start):** read `harness/state/PROGRESS.md` → skim `harness/state/DECISIONS.md`
 (the *why*) → (once it exists) run `make check` → resume from PROGRESS "Next steps".
-**Offboarding (end):** update `PROGRESS.md` → verify consistency → commit completed work.
-Begin handoff prep when a task needs ~60%+ of the context window.
+**Offboarding (end):** update `PROGRESS.md` → `make check` → commit completed work →
+**`make clean-state`** (L12). A session is complete only if the task passed validation
+AND `make clean-state` passes. Begin handoff prep at ~60%+ context use.
 
 ## Where to look (routing — read detail only when the condition matches)
 > Progressive disclosure (L4): this file is a **router**, not an encyclopedia. Load a
@@ -61,6 +63,7 @@ Begin handoff prep when a task needs ~60%+ of the context window.
 | declaring a feature done | `harness/feedback/definition-of-done.md` (3-layer gate; never self-mark) |
 | changing example-app architecture | `example-app/scripts/check-architecture.sh` (enforced boundaries) |
 | evaluating a feature / reading why it was accepted | `harness/feedback/evaluator-rubric.md`, `verification-log.md` |
+| ending a session | run `make clean-state` (L12 session-completion gate) |
 
 ## Hard constraints (the few that always apply — kept here at the end on purpose)
 > Recency effect (L4): the rules most likely to be violated live at a document boundary,

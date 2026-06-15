@@ -1,9 +1,10 @@
 # The Cold-Start Test
 
-> From Lecture 3. The validation method for repository completeness *until* we have an
-> automated Feedback subsystem. Open a **fresh session with repo contents only** (no
-> chat history, no memory) and try to answer five questions. An unanswerable question
-> is a **map gap** — exactly where an agent will guess wrong.
+> From Lecture 3. A **complementary** repo-completeness check. (Through L8 it was the
+> primary validation; since automated `make check` exists, L12 demoted it to complementary
+> — see the harness-simplification log in CONSTRAINTS.md.) Open a **fresh session with repo
+> contents only** (no chat history, no memory) and try to answer five questions. An
+> unanswerable question is a **map gap** — exactly where an agent will guess wrong.
 
 ## The five questions
 1. What is this system?

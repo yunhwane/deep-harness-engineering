@@ -34,7 +34,14 @@
   external source conflicts with the repo, the **repo wins** (anti-pattern: *External
   Authority*).  _(source: L3)_
 
-## Interim rules (have a sunset)
-- Until the Feedback subsystem exists, validation = the **Cold-Start Test**
-  (`diagnostics/cold-start-test.md`). _(source: L3 · **sunset:** delete once automated
-  validation lands in L9-L11.)_
+## Session completion (L12)
+- A session is complete **only if** the task passes validation **AND** `make clean-state`
+  passes (build, test, progress committed, no stray artifacts). Both non-negotiable.
+  _(source: L12)_
+
+## Harness simplification log (L12)
+- **2026-06-15 — retired the interim Cold-Start-as-primary-validation rule.** Its sunset
+  (set at L3/L4) has arrived: automated validation now exists (`make check`). Primary
+  validation is `make check`; the Cold-Start Test (`diagnostics/cold-start-test.md`)
+  remains a *complementary* repo-completeness check, no longer the gate. This is the
+  monthly "remove a constraint that capability/tooling made redundant" practice in action.
