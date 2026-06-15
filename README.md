@@ -27,7 +27,7 @@ By the end, the harness here should be one we (and an agent) can genuinely use.
 - [x] **L8** — Feature lists are harness primitives → `harness/scope/feature_list.json`
 - [x] **L9** — Agents declare victory too early → `definition-of-done.md`; F01 verified→passing
 - [x] **L10** — E2E testing changes results → real E2E suite + `check-architecture.sh`; app 6/6
-- [ ] L11 — Observability inside the harness
+- [x] **L11** — Observability inside the harness → structured logs + `evaluator-rubric.md`, `verification-log.md`
 - [ ] L12 — Every session must leave a clean state
 
 ## The core idea (L1)

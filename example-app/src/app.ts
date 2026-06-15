@@ -1,15 +1,18 @@
-import Fastify, { type FastifyInstance } from 'fastify'
+import Fastify, { type FastifyInstance, type FastifyServerOptions } from 'fastify'
 import { createTask, listTasks, getTask, updateTask, deleteTask } from './store'
 
 /**
  * App factory. Returns a configured Fastify instance without listening, so tests can
  * use `app.inject(...)` and the server entrypoint can `app.listen(...)`.
  *
- * Routes are added one feature at a time, gated by feature_list.json:
- *   F00 GET /health (L6), F01 POST /tasks (L9). F02-F05 still not_started.
+ * Runtime observability (L11): the caller passes a `logger` option. Real runs (server.ts)
+ * enable structured JSON request/lifecycle logs; tests leave it off to stay quiet. App
+ * code logs via the Fastify logger (`req.log` / `app.log`), never console.* (arch Rule 2).
+ *
+ * All routes F00-F05 are passing; see feature_list.json (authoritative).
  */
-export function buildApp(): FastifyInstance {
-  const app = Fastify({ logger: false })
+export function buildApp(opts: { logger?: FastifyServerOptions['logger'] } = {}): FastifyInstance {
+  const app = Fastify({ logger: opts.logger ?? false })
 
   app.get('/health', async () => ({ status: 'ok' }))
 

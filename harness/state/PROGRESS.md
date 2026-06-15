@@ -4,7 +4,7 @@
 > working state in minutes, not by re-exploring. Keep it current — stale = worse than none.
 
 ## Current status
-- **Latest commit:** `612d22f` (L9: DoD + F01 passing)
+- **Latest commit:** `591d139` (L10: E2E + arch checks; app 6/6)
 - **Stack:** Node 26 + TypeScript + Fastify + vitest (`example-app/`)
 - **Tests:** `make check` green — `tsc` clean + 1 test (`GET /health`)
 - **Server:** boots; `curl :PORT/health → {"status":"ok"}`
@@ -22,6 +22,7 @@
 - [x] L8 — feature_list.json (scope surface) + schema; F00 passing, F01-F05 not_started
 - [x] L9 — Definition of Done (3-layer gate); F01 POST /tasks driven to passing via independent verifier
 - [x] L10 — real E2E harness + executable arch checks; F02-F05 implemented & verified
+- [x] L11 — observability: structured runtime logs + rubric/sprint-contract/verification-log
 
 ## In progress
 - (nothing — between lectures)
@@ -38,8 +39,7 @@
 - "Latest commit" line lags one checkpoint by design; reconcile at each onboarding.
 
 ## Next steps (priority order)
-1. L11 — observability inside the harness (structured logs/signals; ties to arch Rule 2).
-2. L12 — clean-state-per-session (final lecture).
+1. L12 — every session must leave a clean state (final lecture).
 
 ## How to resume (onboarding)
 Read this file → read `harness/state/DECISIONS.md` → check `README.md` progress →
